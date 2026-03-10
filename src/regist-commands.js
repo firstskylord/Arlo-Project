@@ -3,19 +3,14 @@ const { REST, Routes, ApplicationCommandOptionType } = require('discord.js');
 
 const commands = [
     {
-        name: 'laugh',
-        description: 'Laughs at you hysterically',
+        name: 'wordgoal',
+        description: 'Set your Daily word goal',
         options: [
             {
-                name: 'haha',
-                description: 'Lolo',
+                name: 'target',
+                description: 'Enter your daily word goal',
                 type: ApplicationCommandOptionType.Number,
-                choices: [
-                    {
-                        name: 'One',
-                        value: 1,
-                    }
-                ],
+                required: true,
             },
         ],
     },
