@@ -37,6 +37,10 @@ src/
     └── slashcom.js      — All message interaction logic
 ├── index.js                  — Bot startup and login
 └── regist-commands.js      — Slash command registration with Discord API
+.gitignore
+README.md
+package-lock.json
+package.json
 
 ```
 
