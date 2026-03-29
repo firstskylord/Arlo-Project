@@ -54,5 +54,6 @@ src/
 
 - Arlo is currently hosted locally. Remote hosting is not yet configured.
 - This bot is built exclusively for **Nova Archives** and is not designed for general use.
+- Join the Discord Community: [Nova Archives](https://discord.gg/vj4jmWBftZ)
 
 ---
