@@ -347,7 +347,11 @@ Moderation won't be able to handle issues through member-to-member DMs — if so
                     },
                     {
                         name: `Community Guide`,
-                        value: `TBA`
+                        value: `- Be the first friendly face a new member encounters. Welcome them in <#1478812141313200261> before staff even notices.
+- Answer basic questions about the server that new members are too shy to ask staff directly.
+- Point people toward the right channel when they post something in the wrong place — gently, not condescendingly.
+- Flag anything concerning to a Proofreader or Copy Editor rather than handling it yourself. You have no moderation permissions and shouldn't act like you do.
+- Show up consistently in the community spaces — Workshop, Genre Dens, Lounge. Your presence is the job.`
                     }
                 );
 

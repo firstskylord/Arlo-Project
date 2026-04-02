@@ -32,6 +32,30 @@ const commands = [
             },
         ],
     },
+    {
+        name: 'warn',
+        description: 'Warn a user for misconduct of rules',
+        options: [
+            {
+                name: 'user',
+                description: 'Select the user to warn',
+                type: ApplicationCommandOptionType.User,
+                required: true,
+            },
+            {
+                name: 'reason',
+                description: 'State your reason.',
+                type: ApplicationCommandOptionType.String,
+                required: true,
+            },
+            {
+                name: 'message-link',
+                description: 'Provide a link to the message that violates the rules (if applicable)',
+                type: ApplicationCommandOptionType.String,
+                required: false,
+            },
+        ],
+    },
 ];
 
 const rest = new REST({ version: '10' }).setToken(process.env.ARLO_TOKEN);
