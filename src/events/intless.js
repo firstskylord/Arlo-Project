@@ -15,7 +15,7 @@ module.exports = (client) => {
         ];
 
         const welcomeEmbed = new EmbedBuilder()
-            .setTitle(`Welcome to the Nova Archives, <@${member.user.tag}>!`)
+            .setTitle(`Welcome to the Nova Archives, ${member.user.tag}!`)
             .setDescription(`Start by visiting the <id:home> to guide yourself through the community!`)
             .setImage(`https://media.discordapp.net/attachments/1180848523051270216/1489282923692687360/Welcome_Card.png?ex=69cfda4e&is=69ce88ce&hm=a6de6edc3e4f5f139323be92a9b1685607fada66c39c7d7c753a94f48ffb2177&=&format=webp&quality=lossless`)
             .setColor('#408A71')
