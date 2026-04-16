@@ -84,8 +84,25 @@ Review the embed above, interrogate the situation, discuss among yourselves here
             await interaction.reply({ content: 'Your report has been submitted. Moderators will look into it as soon as possible.', ephemeral: true });
         }
 
-        if (interaction.commandName === 'speak-embed') {
-            
+            if (interaction.commandName === 'speak-embed') {
+
+            await interaction.deferReply({ ephemeral: true });
+
+            const CommsEmbed = new EmbedBuilder()
+                .setTitle(interaction.options.getString('title'))
+                .setDescription(interaction.options.getString('description'))
+                .setThumbnail(interaction.options.getString('thumbnail') || null)
+                .setImage(interaction.options.getString('image') || null)
+                .setURL(interaction.options.getString('url') || null)
+                .setColor('#1abc9c')
+                .setFooter({ 
+                    text: `Written by ${interaction.user.tag}`,
+                })
+                .setTimestamp();
+
+            await interaction.channel.send({ embeds: [CommsEmbed] });
+
+            await interaction.editReply('Embed has been sent in the current channel.');
         }
     })
 }
