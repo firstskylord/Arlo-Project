@@ -14,7 +14,7 @@ Arlo listens to messages and responds contextually.
 | Any message containing `Arlo` | Reacts with 👀 | Global Interaction |
 | `Arlo, pin this` | Reacts with 📌 and pins the message containing the command | Staff Only Interaction | 
 | `Arlo, pin it` (as a reply) | Reacts with 📌 and pins the replied message | Staff Only Interaction | 
-| `Arlo, start knitting` | Starts a thread on the message | Staff Only Interaction | 
+| `Arlo, start knitting` | Reacts with 🧶 and starts a thread on the message | Staff Only Interaction | 
 | `Arlo, Update Guide` | Sends the Guide Embed in Guide Channel | Staff Only Interaction | 
 | `Arlo, Update Staff` | Sends the Guide Embed in a Staff Channel | Staff Only Interaction | 
 | `Arlo, Reload the Gun` | Sends the Prompt Roulette Embed Set in Prompt Roulette Channel | Staff Only Interaction | 
@@ -34,6 +34,15 @@ Arlo listens to messages and responds contextually.
 
 > Slash commands marked as **Staff Only Command** require one of the following roles:
 > `✦ Quill Master`, `Senior Editor`, `Copy Editor`, `Proofreader`, `Event Curator`, or `Archivist`.
+---
+
+### 🤝🏻 Passive Interactions
+
+| Trigger | Description | Comment |
+|---|---|---|
+| Any message in `#🖋️・introduction` | Arlo reacts with 👋🏻 | Global Interaction | 
+| Any message in `#🎉・milestones` | Arlo reacts with 👏🏻 and 🎉 | Global Interaction | 
+
 ---
 
 ## Project Structure
