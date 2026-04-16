@@ -11,8 +11,8 @@ Arlo listens to messages and responds contextually.
 
 | Trigger | What Arlo Does | Comment |
 |---|---|---|
-| Any message containing `arlo` | Reacts with 👀 | Global Interaction |
-| `Arlo, pin this` (as a reply) | Reacts with 📌 and pins the message containing the command | Staff Only Interaction | 
+| Any message containing `Arlo` | Reacts with 👀 | Global Interaction |
+| `Arlo, pin this` | Reacts with 📌 and pins the message containing the command | Staff Only Interaction | 
 | `Arlo, pin it` (as a reply) | Reacts with 📌 and pins the replied message | Staff Only Interaction | 
 | `Arlo, start knitting` | Starts a thread on the message | Staff Only Interaction | 
 | `Arlo, Update Guide` | Sends the Guide Embed in Guide Channel | Staff Only Interaction | 
