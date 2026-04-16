@@ -482,5 +482,62 @@ You can still be active in the server, but you won't be pinged for moderation or
             await message.channel.send({ embeds: [ShelvingEmbed], components: [ShelvedRow] });
                 message.react('🫡');
         }
+
+        if(message.content.toLowerCase().includes('arlo, reload the gun')) { // Embeds for the 🎲・prompt-roulette channel
+            const ModRoles = ['✦ Quill Master', 'Senior Editor'];
+            const hasRole = message.member.roles.cache.some(r => ModRoles.includes(r.name));
+            if (!hasRole) return;
+
+            const PromptRouletteWelcEmbed = new EmbedBuilder() // Welcome Embed for the 🎲・prompt-roulette channel
+                .setTitle('🎲 Welcome to Prompt Roulette!')
+                .setDescription(`Here you can generate random writing prompts to spark your creativity. Whether you're looking for a quick idea or a new concept, Prompt Roulette has you covered.
+
+You can choose the type of builder you want from the below embeds, and click the respective buttons to generate a random element for your writing.
+
+The chosen element will be shown as an ephemeral message, so you can build your story and reveal it when you're ready.
+You can share the stories under 500 words in <#1478815167746932898> and for stories above 500 words, you can share with the community in <#1478814424008626226>.
+You can share the prompt along with the stories to encourage other writers to join in the fun!
+
+Happy Writing!`)
+                .setColor('#285A48');
+
+            const FragBuildEmbed = new EmbedBuilder() // Fragment Builder Embed for 🎲・prompt-roulette
+                .setTitle('🎭 Fragment Builder')
+                .setDescription(`Build a story piece by piece using structured elements like character, setting, conflict, and theme.
+Perfect for when you want direction without losing creative control.`)
+                .setColor('#B0E4CC');
+
+            const FragBuildRow = new ActionRowBuilder() // Fragment Builder Buttons for 🎲・prompt-roulette
+
+            const ConsChaosEmbed = new EmbedBuilder() // Constraint Chaos Embed for 🎲・prompt-roulette
+                .setTitle('⛓️ Constraint Chaos Mode')
+                .setDescription(`Generate unusual writing restrictions that force you to think differently and break привычные patterns.
+Ideal for sharpening creativity by working within limits.`)
+                .setColor('#B0E4CC');
+
+            const ConsChaosRow = new ActionRowBuilder() // Constraint Chaos Buttons for 🎲・prompt-roulette
+
+            const WildCardEmbed = new EmbedBuilder() // Wildcard Story Spark Embed for 🎲・prompt-roulette
+                .setTitle('🃏 Wildcard Story Spark')
+                .setDescription(`Receive a completely random mix of elements like character, object, mood, and genre.
+Designed for pure spontaneity and unpredictable inspiration.`)
+                .setColor('#B0E4CC');
+
+            const WildCardRow = new ActionRowBuilder() // Wildcard Story Spark Buttons for 🎲・prompt-roulette
+
+            const PromptRouletteChannel = client.channels.cache.get(process.env.PROMPTROULETTE_CHANNEL_ID);
+            await PromptRouletteChannel.send({ embeds:
+                    [PromptRouletteWelcEmbed]
+                });
+            await PromptRouletteChannel.send({ embeds:
+                    [FragBuildEmbed]
+                });
+            await PromptRouletteChannel.send({ embeds:
+                    [ConsChaosEmbed]
+                });
+            await PromptRouletteChannel.send({ embeds:
+                    [WildCardEmbed]
+                });
+        }
     });
 }

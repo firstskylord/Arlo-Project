@@ -47,7 +47,7 @@ client.on('ready', (c) => {
     setInterval(() => {
         let random = Math.floor(Math.random() * status.length);
         client.user.setActivity(status[random]);
-    }, 10000);
+    }, 60000);
 });
 
 require('./events/messagaction.js')(client);

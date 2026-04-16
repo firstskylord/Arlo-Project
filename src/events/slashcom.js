@@ -27,8 +27,7 @@ module.exports = (client) => {
                 await interaction.member.roles.add(unavailableRole);
                 await interaction.editReply({ content: 'You are now shelved. Mod roles removed until you return 🔴'});
         }
-        }
-        }
+    }}
 
         if (!interaction.isChatInputCommand()) return;
 
