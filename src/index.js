@@ -14,6 +14,8 @@ client.on('ready', (c) => {
     console.log(`🤖 Logged in as ${c.user.tag}`);
 });
 
+// Message Interactions | Replies/Reacts to a message (or) Performs an action based on the message content.
+
 client.on('messageCreate', (message) => {
     if (message.author.bot) {
         return;
@@ -57,5 +59,15 @@ I request <@&1479068137616834754>, <@&1479068546054230016>, <@&14790698631031727
             .then(() => message.react('🎉'));
     }
 });
+
+// Slash Command Interactions | All the actions performed by the bot through slash commands.
+
+client.on('interactionCreate', (interaction) => {
+    if (!interaction.isChatInputCommand()) return;
+
+    if (interaction.commandName === 'laugh') {
+        interaction.reply(`HAHAHAHAHAHAHA!`);
+    }
+})
 
 client.login(process.env.ARLO_TOKEN);
