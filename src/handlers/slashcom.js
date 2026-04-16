@@ -3,7 +3,10 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 
 module.exports = (client) => {
     client.on('interactionCreate', async (interaction) => {
-        if (interaction.isButton()) { // Admin Availability Button Logic
+
+        // Admin Availability Button Logic ONLY | Other buttons in interactionHandlers.js
+
+        if (interaction.isButton()) { 
             if (interaction.customId === 'toggle_availability') {
 
             await interaction.deferReply({ ephemeral: true });
@@ -30,6 +33,8 @@ module.exports = (client) => {
     }}
 
         if (!interaction.isChatInputCommand()) return;
+
+        // ONLY Slash Commands
 
         if (interaction.commandName === 'report') {
             const ReportEmbed = new EmbedBuilder()

@@ -598,7 +598,7 @@ Designed for pure spontaneity and unpredictable inspiration.`)
                         .setLabel('🎭 Genre Flip')
                         .setStyle(ButtonStyle.Primary),
                     new ButtonBuilder()
-                        .setCustomId('RandAll')
+                        .setCustomId('randall')
                         .setLabel('🎲 Random Everything')
                         .setStyle(ButtonStyle.Secondary),
                     );

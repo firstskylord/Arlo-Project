@@ -41,7 +41,7 @@ let status = [
     },
 ]
 
-client.on('ready', (c) => {
+client.on('clientReady', (c) => {
     console.log(`🤖 Logged in as ${c.user.tag}`);
 
     setInterval(() => {
@@ -51,9 +51,10 @@ client.on('ready', (c) => {
 });
 
 require('./events/messagaction.js')(client);
-require('./events/slashcom.js')(client);
+require('./handlers/slashcom.js')(client);
 require('./events/editdel.js')(client);
 require('./events/warnmuteban.js')(client);
 require('./events/intless.js')(client);
+require('./handlers/interactionHandlers.js')(client);
 
 client.login(process.env.ARLO_TOKEN);
