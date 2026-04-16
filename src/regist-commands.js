@@ -56,6 +56,42 @@ const commands = [
             },
         ],
     },
+    {
+        name: 'speak-embed',
+        description: 'Lets the user speak through the bot by sending an embed message.',
+        options: [
+            {
+                name: 'title',
+                description: 'Enter the title for the embed message',
+                type: ApplicationCommandOptionType.String,
+                required: true,
+            },
+            {
+                name: 'description',
+                description: 'Enter the description for the embed message',
+                type: ApplicationCommandOptionType.String,
+                required: true,
+            },
+            {
+                name: 'thumbnail',
+                description: 'Provide a link to the thumbnail for the embed message',
+                type: ApplicationCommandOptionType.String,
+                required: false,
+            },
+            {
+                name: 'image',
+                description: 'Provide a link to the image for the embed message',
+                type: ApplicationCommandOptionType.String,
+                required: false,
+            },
+            {
+                name: 'url',
+                description: 'Provide a link to the title for the embed message',
+                type: ApplicationCommandOptionType.String,
+                required: false,
+            }
+        ],
+    },
 ];
 
 const rest = new REST({ version: '10' }).setToken(process.env.ARLO_TOKEN);

@@ -83,5 +83,9 @@ Review the embed above, interrogate the situation, discuss among yourselves here
 
             await interaction.reply({ content: 'Your report has been submitted. Moderators will look into it as soon as possible.', ephemeral: true });
         }
+
+        if (interaction.commandName === 'speak-embed') {
+            
+        }
     })
 }
