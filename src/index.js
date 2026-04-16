@@ -55,6 +55,6 @@ require('./handlers/slashcom.js')(client);
 require('./events/editdel.js')(client);
 require('./events/warnmuteban.js')(client);
 require('./events/intless.js')(client);
-require('./handlers/interactionHandlers.js')(client);
+require('./handlers/buttonhandlers.js')(client);
 
 client.login(process.env.ARLO_TOKEN);

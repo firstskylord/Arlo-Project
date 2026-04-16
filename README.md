@@ -16,7 +16,8 @@ Arlo listens to messages and responds contextually.
 | `Arlo, pin it` (as a reply) | Reacts with 📌 and pins the replied message | Staff Only Interaction | 
 | `Arlo, start knitting` | Starts a thread on the message | Staff Only Interaction | 
 | `Arlo, Update Guide` | Sends the Guide Embed in Guide Channel | Staff Only Interaction | 
-| `Arlo, Update Staff` | Sends the Guide Embed in Specified Channel | Staff Only Interaction | 
+| `Arlo, Update Staff` | Sends the Guide Embed in a Staff Channel | Staff Only Interaction | 
+| `Arlo, Reload the Gun` | Sends the Prompt Roulette Embed Set in Prompt Roulette Channel | Staff Only Interaction | 
 
 > Message interactions marked as **Staff Only Interaction** require one of the following roles:
 > `✦ Quill Master`, `Senior Editor`, `Copy Editor`, `Proofreader`, `Event Curator`, or `Archivist`.
@@ -29,6 +30,7 @@ Arlo listens to messages and responds contextually.
 |---|---|---|
 | `/report` | Report a member to the moderation team. Sends an embed to the staff channel and confirms with an ephemeral reply to the user. | Global Command | 
 | `/warn` | Warn a member in the community. Sends an embed to the staff channel and confirms with an ephemeral reply to the moderator. | Staff Only Command | 
+| `/speak-embed` | Member can send an embed with custom Title, Description, Thumbnail, Image and Url. The bot will make a note of who triggered the embed. | Staff Only Command | 
 
 > Slash commands marked as **Staff Only Command** require one of the following roles:
 > `✦ Quill Master`, `Senior Editor`, `Copy Editor`, `Proofreader`, `Event Curator`, or `Archivist`.
@@ -37,12 +39,16 @@ Arlo listens to messages and responds contextually.
 ## Project Structure
 ```
 src/
+├── data/
+    └── prompts.js            — All the prompts that will be used by default by Arlo
 ├── events/
     ├── editdel.js            — All edited and deleted message logs logic
     ├── intless.js            — All logic for interaction less actions
-    ├── messagaction.js       — All slash command logic
-    ├── slashcom.js           — All message interaction logic
+    ├── messagaction.js       — All message interaction logic
     └── warnmuteban.js        — All logs and action logic for Warns / Mutes / Bans
+├── handlers/
+    ├── buttonhandlers.js     — All button handling logic
+    └── slashcom.js           — All slash command logic
 ├── index.js                  — Bot startup and login
 └── regist-commands.js        — Slash command registration with Discord API
 .gitignore
