@@ -44,7 +44,9 @@ src/
 
 ## Tech Stack
 
-- [Discord.js v14](https://discord.js.org/)
+  ![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=flat&logo=javascript)
+  ![discord.js](https://img.shields.io/badge/discord.js-5865F2?style=flat&logo=discord&logoColor=white)
+  ![node.js](https://img.shields.io/badge/Node.js-233056?style=flat&logo=node.js)
 
 ---
 
@@ -54,11 +56,3 @@ src/
 - This bot is built exclusively for **Nova Archives** and is not designed for general use.
 
 ---
-
-## Contributing
-
-This is a private community project. If you're a staff member of Nova Archives and have a feature request, use the `#feature-suggestions` channel in the server.
-
----
-
-*Arlo — Librarian at Nova Archives. Arlo#0488*
