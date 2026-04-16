@@ -507,7 +507,41 @@ Happy Writing!`)
 Perfect for when you want direction without losing creative control.`)
                 .setColor('#B0E4CC');
 
-            const FragBuildRow = new ActionRowBuilder() // Fragment Builder Buttons for 🎲・prompt-roulette
+            const FragBuildRowOne = new ActionRowBuilder() // Fragment Builder Buttons for 🎲・prompt-roulette
+                    .addComponents(
+                    new ButtonBuilder()
+                        .setCustomId('protagtype')
+                        .setLabel('🎭 Protagonist Type')
+                        .setStyle(ButtonStyle.Primary),
+                    new ButtonBuilder()
+                        .setCustomId('setting')
+                        .setLabel('🌍 Setting')
+                        .setStyle(ButtonStyle.Primary),
+                    new ButtonBuilder()
+                        .setCustomId('conflict')
+                        .setLabel('⚡ Conflict')
+                        .setStyle(ButtonStyle.Primary),
+                    new ButtonBuilder()
+                        .setCustomId('goal')
+                        .setLabel('🎯 Goal')
+                        .setStyle(ButtonStyle.Primary),
+                    new ButtonBuilder()
+                        .setCustomId('theme')
+                        .setLabel('🧠 Theme')
+                        .setStyle(ButtonStyle.Primary),
+                    );
+            
+            const FragBuildRowTwo = new ActionRowBuilder() // Fragment Builder Buttons for 🎲・prompt-roulette
+                    .addComponents(
+                    new ButtonBuilder()
+                        .setCustomId('twist')
+                        .setLabel('🔥 Twist')
+                        .setStyle(ButtonStyle.Primary),
+                    new ButtonBuilder()
+                        .setCustomId('genall')
+                        .setLabel('🎲 Generate All')
+                        .setStyle(ButtonStyle.Secondary),
+                    );
 
             const ConsChaosEmbed = new EmbedBuilder() // Constraint Chaos Embed for 🎲・prompt-roulette
                 .setTitle('⛓️ Constraint Chaos Mode')
@@ -516,6 +550,28 @@ Ideal for sharpening creativity by working within limits.`)
                 .setColor('#B0E4CC');
 
             const ConsChaosRow = new ActionRowBuilder() // Constraint Chaos Buttons for 🎲・prompt-roulette
+                    .addComponents(
+                    new ButtonBuilder()
+                        .setCustomId('limitation')
+                        .setLabel('⛓️ Limitation')
+                        .setStyle(ButtonStyle.Primary),
+                    new ButtonBuilder()
+                        .setCustomId('timelimit')
+                        .setLabel('⏱️ Time Constraint')
+                        .setStyle(ButtonStyle.Primary),
+                    new ButtonBuilder()
+                        .setCustomId('style')
+                        .setLabel('🔤 Style Rule')
+                        .setStyle(ButtonStyle.Primary),
+                    new ButtonBuilder()
+                        .setCustomId('tone')
+                        .setLabel('💬 Tone')
+                        .setStyle(ButtonStyle.Primary),
+                    new ButtonBuilder()
+                        .setCustomId('all_limit')
+                        .setLabel('🎲 All Constraints')
+                        .setStyle(ButtonStyle.Secondary),
+                    );
 
             const WildCardEmbed = new EmbedBuilder() // Wildcard Story Spark Embed for 🎲・prompt-roulette
                 .setTitle('🃏 Wildcard Story Spark')
@@ -524,19 +580,44 @@ Designed for pure spontaneity and unpredictable inspiration.`)
                 .setColor('#B0E4CC');
 
             const WildCardRow = new ActionRowBuilder() // Wildcard Story Spark Buttons for 🎲・prompt-roulette
+                    .addComponents(
+                    new ButtonBuilder()
+                        .setCustomId('object')
+                        .setLabel('🐉 Object')
+                        .setStyle(ButtonStyle.Primary),
+                    new ButtonBuilder()
+                        .setCustomId('character')
+                        .setLabel('🧍 Character')
+                        .setStyle(ButtonStyle.Primary),
+                    new ButtonBuilder()
+                        .setCustomId('mood')
+                        .setLabel('🌧️ Mood')
+                        .setStyle(ButtonStyle.Primary),
+                    new ButtonBuilder()
+                        .setCustomId('genflip')
+                        .setLabel('🎭 Genre Flip')
+                        .setStyle(ButtonStyle.Primary),
+                    new ButtonBuilder()
+                        .setCustomId('RandAll')
+                        .setLabel('🎲 Random Everything')
+                        .setStyle(ButtonStyle.Secondary),
+                    );
 
             const PromptRouletteChannel = client.channels.cache.get(process.env.PROMPTROULETTE_CHANNEL_ID);
             await PromptRouletteChannel.send({ embeds:
                     [PromptRouletteWelcEmbed]
                 });
-            await PromptRouletteChannel.send({ embeds:
-                    [FragBuildEmbed]
+            await PromptRouletteChannel.send({
+                    embeds: [FragBuildEmbed],
+                    components: [FragBuildRowOne, FragBuildRowTwo]
                 });
-            await PromptRouletteChannel.send({ embeds:
-                    [ConsChaosEmbed]
+            await PromptRouletteChannel.send({
+                    embeds: [ConsChaosEmbed],
+                    components: [ConsChaosRow]
                 });
-            await PromptRouletteChannel.send({ embeds:
-                    [WildCardEmbed]
+            await PromptRouletteChannel.send({
+                    embeds: [WildCardEmbed],
+                    components: [WildCardRow]
                 });
         }
     });
