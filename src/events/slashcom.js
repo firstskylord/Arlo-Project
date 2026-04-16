@@ -1,8 +1,35 @@
 require('dotenv').config();
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
 module.exports = (client) => {
     client.on('interactionCreate', async (interaction) => {
+        if (interaction.isButton()) { // Admin Availability Button Logic
+            if (interaction.customId === 'toggle_availability') {
+
+            await interaction.deferReply({ ephemeral: true });
+
+            console.log('Button triggered by:', interaction.member.displayName);
+
+            const modRoles = ['✦ Quill Master', 'Senior Editor', 'Copy Editor', 'Proofreader', 'Event Curator', 'Archivist'];
+            const unavailableRoleName = 'Shelved Editor';
+
+            const unavailableRole = interaction.guild.roles.cache.find(r => r.name === unavailableRoleName);
+            if (!unavailableRole) return interaction.editReply({ content: 'Role not found.'});
+
+            const hasUnavailable = interaction.member.roles.cache.has(unavailableRole.id);
+
+            if (hasUnavailable) {
+                await interaction.member.roles.remove(unavailableRole);
+                await interaction.editReply({ content: 'You are back. Welcome back to the desk 🟢'});
+            } else {
+                const modRolesToRemove = interaction.member.roles.cache.filter(r => modRoles.includes(r.name));
+                if (modRolesToRemove.size > 0) await interaction.member.roles.remove(modRolesToRemove);
+                await interaction.member.roles.add(unavailableRole);
+                await interaction.editReply({ content: 'You are now shelved. Mod roles removed until you return 🔴'});
+        }
+        }
+        }
+
         if (!interaction.isChatInputCommand()) return;
 
         if (interaction.commandName === 'report') {

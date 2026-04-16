@@ -1,7 +1,8 @@
 require('dotenv').config();
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
 module.exports = (client) => {
+
     client.on('messageCreate', async (message) => {
 
         // Actions performed by the bot through message commands | **Used on regular basis**
@@ -362,15 +363,16 @@ Moderation won't be able to handle issues through member-to-member DMs — if so
                 .setFields(
                     {
                         name: `Presence`,
-                        value: `Show up consistently. You don't need to be online every hour, but if you go dark for extended periods without notice, your role will be reviewed. Set your status to unavailable if you need space — don't just disappear.`
+                        value: `Show up consistently. You don't need to be online every hour, but if you go dark for extended periods without notice, your role will be reviewed. Set your status to unavailable if you need space — don't just disappear.
+Claim the 'Shelved Editor' role from the button below to signal when you're taking a break from staff duties.`
                     },
                     {
                         name: `Communication`,
-                        value: `Staff decisions happen in #staff-lounge, not in public channels. If you disagree with a moderation call, raise it internally. Never contradict another staff member's decision in front of the general membership.`
+                        value: `Staff decisions happen in <#${process.env.STAFFLOUNGE_CHANNEL_ID}>, not in public channels. If you disagree with a moderation call, raise it internally. Never contradict another staff member's decision in front of the general membership.`
                     },
                     {
                         name: `Reports`,
-                        value: `Every report that comes into <#> gets a response. Even if the action taken is "reviewed and no action needed," the thread gets closed with a note. No report sits unacknowledged.`
+                        value: `Every report that comes into <#${process.env.REPORT_CHANNEL_ID}> gets a response. Even if the action taken is "reviewed and no action needed," the thread gets closed with a note. No report sits unacknowledged.`
                     },
                     {
                         name: `Escalation`,
@@ -451,6 +453,20 @@ Once a decision is reached and action is taken, the staff member handling it pos
                 )
                 .setFooter({ text: `If something doesn't have a home, it goes in #staff-lounge until it does.` });
 
+            const ShelvingEmbed = new EmbedBuilder()
+                .setTitle('🔴 Toggle your availability status. 🟢')
+                .setDescription(`Click the button below to toggle your <@&1493154104078241792> role. This signals to the rest of the team that you're taking a break from staff duties.
+You can still be active in the server, but you won't be pinged for moderation or event tasks while shelved.`)
+                .setColor('#B0E4CC');
+
+            const ShelvedRow = new ActionRowBuilder()
+                .addComponents(
+                    new ButtonBuilder()
+                        .setCustomId('toggle_availability')
+                        .setLabel('Change Availability Status')
+                        .setStyle(ButtonStyle.Success)
+                    );
+
             const StaffInfoChannel = client.channels.cache.get(process.env.STAFFINFO_CHANNEL_ID);
             await StaffInfoChannel.send({ embeds: 
                     [StaffInfoImgEmbed,
@@ -463,6 +479,7 @@ Once a decision is reached and action is taken, the staff member handling it pos
                     StaffCommandsEmbed,
                     StaffChannelsImgEmbed,
                     StaffChannelsEmbed] });
+            await message.channel.send({ embeds: [ShelvingEmbed], components: [ShelvedRow] });
                 message.react('🫡');
         }
     });

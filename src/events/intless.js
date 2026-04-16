@@ -25,4 +25,6 @@ module.exports = (client) => {
 
         await welcomeChannel.send({ embeds: [welcomeEmbed] });
     });
+
+    
 }

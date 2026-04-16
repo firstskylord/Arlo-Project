@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { Client, IntentsBitField } = require('discord.js');
+const { Client, IntentsBitField, ActionRowBuilder, ButtonBuilder, ButtonStyle, ActivityType } = require('discord.js');
 
 const client = new Client({
     intents: [
@@ -10,8 +10,44 @@ const client = new Client({
     ],
 });
 
+let status = [
+    {
+        name: 'Curating Nova Archives ✨',
+        type: ActivityType.Custom,
+    },
+    {
+        name: 'Pressing flowers between pages',
+        type: ActivityType.Custom,
+    },
+    {
+        name: 'Watching ink dry',
+        type: ActivityType.Custom,
+    },
+    {
+        name: 'Someone left a cliffhanger unfinished...',
+        type: ActivityType.Custom,
+    },
+    {
+        name: 'Reading between your lines',
+        type: ActivityType.Custom,
+    },
+    {
+        name: 'Believing in your chapter three',
+        type: ActivityType.Custom,
+    },
+    {
+        name: 'Some stories begin before the first page',
+        type: ActivityType.Custom,
+    },
+]
+
 client.on('ready', (c) => {
     console.log(`🤖 Logged in as ${c.user.tag}`);
+
+    setInterval(() => {
+        let random = Math.floor(Math.random() * status.length);
+        client.user.setActivity(status[random]);
+    }, 10000);
 });
 
 require('./events/messagaction.js')(client);
