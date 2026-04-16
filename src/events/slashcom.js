@@ -11,9 +11,18 @@ module.exports = (client) => {
                 .setDescription(`**${interaction.user} has reported ${interaction.options.getUser('user')}** for misconduct of rules.
 Please check the reason below and take necessary action.`)
                 .setFields(
-                    { name: '👤・Reason', value: `${interaction.options.getString('reason')}` },
-                    { name: '🔗・Message Link', value: `${interaction.options.getString('message-link') || 'N/A'}` },
-                    { name: '💳・UserID', value: `${interaction.options.getUser('user').id}` }
+                    {
+                        name: '👤・Reason',
+                        value: `${interaction.options.getString('reason')}`
+                    },
+                    {
+                        name: '🔗・Message Link',
+                        value: `${interaction.options.getString('message-link') || 'N/A'}`
+                    },
+                    {
+                        name: '💳・UserID',
+                        value: `${interaction.options.getUser('user').id}`
+                    }
                 )
                 .setThumbnail(interaction.options.getUser('user').displayAvatarURL())
                 .setImage(interaction.options.getAttachment('evidence') ? interaction.options.getAttachment('evidence').url : null)

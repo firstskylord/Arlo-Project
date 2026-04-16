@@ -1,13 +1,16 @@
 require('dotenv').config();
-const {  } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = (client) => {
     client.on('messageCreate', async (message) => {
+
+        // Actions performed by the bot through message commands | Used on regular basis
+
         if (message.author.bot) {
             return;
         }
 
-        if (message.content.toLowerCase().includes('arlo')) {
+        if (message.content.toLowerCase().includes('arlo')) { // Reacts to messages that contain "Arlo"
             message.react('👀')
         }
 
@@ -48,13 +51,51 @@ I request <@&1479068137616834754>, <@&1479068546054230016>, <@&14790698631031727
                 });
         }
 
-        if (message.channelId === '1478809803097772231') { // Reacts to messages in #🖋️・introduction channel
+        if (message.channelId === process.env.INTRODUCTION_CHANNEL_ID) { // Reacts to messages in #🖋️・introduction channel
             message.react('👋🏻');
         }
 
-        if (message.channelId === '1478819435778150431') { // Reacts to messages in #🎉・milestones channel
+        if (message.channelId === process.env.MILESTONES_CHANNEL_ID) { // Reacts to messages in #🎉・milestones channel
             message.react('👏🏻')
                 .then(() => message.react('🎉'));
         }
+
+        // Embeds sent through request in specific channels | Used rarely
+        
+        if(message.content.toLowerCase().includes('arlo, update guide')) { // Embed for the 📖・guide channel
+            const ModRoles = ['✦ Quill Master', 'Senior Editor'];
+            const hasRole = message.member.roles.cache.some(r => ModRoles.includes(r.name));
+            if (!hasRole) return;
+
+            const GuideWelcEmbed = new EmbedBuilder()
+                .setTitle('Welcome to Nova Archives!')
+                .setDescription(``)
+                .setFields(
+                    {
+                        name: '',
+                        value: ``
+                    },
+                    {
+                        name: '',
+                        value: ``
+                    },
+                    {
+                        name: '',
+                        value: ``
+                    }
+                )
+                .setThumbnail()
+                .setImage()
+                .setColor('#1abc9c')
+                .setFooter({
+                    text: 'Embed',
+                    iconURL: ``
+                });
+
+                const GuideChannel = interaction.client.channels.cache.get(process.env.GUIDE_CHANNEL_ID);
+                    GuideChannel.send({ embeds: [GuideWelcEmbed] });
+        }
+
+
     });
 }
