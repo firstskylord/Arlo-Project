@@ -16,5 +16,8 @@ client.on('ready', (c) => {
 
 require('./events/messagaction.js')(client);
 require('./events/slashcom.js')(client);
+require('./events/editdel.js')(client);
+require('./events/warnmuteban.js')(client);
+require('./events/intless.js')(client);
 
 client.login(process.env.ARLO_TOKEN);
