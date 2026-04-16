@@ -9,12 +9,12 @@ Arlo is the custom Discord bot for **Nova Archives** — a writers and readers c
 ### 💬 Message Interactions
 Arlo listens to messages and responds contextually.
 
-| Trigger | What Arlo Does |
-|---|---|
-| Any message containing `arlo` | Reacts with 👀 |
-| `Arlo, pin this` (as a reply) | Reacts with 📌 and pins the message containing the command | (Staff Only Command)
-| `Arlo, pin it` (as a reply) | Reacts with 📌 and pins the replied message | (Staff Only Command)
-| `Arlo, start knitting` | Starts a thread on the message | (Staff Only Command)
+| Trigger | What Arlo Does | Comment |
+|---|---|---|
+| Any message containing `arlo` | Reacts with 👀 | Global Command |
+| `Arlo, pin this` (as a reply) | Reacts with 📌 and pins the message containing the command | Staff Only Command | 
+| `Arlo, pin it` (as a reply) | Reacts with 📌 and pins the replied message | Staff Only Command | 
+| `Arlo, start knitting` | Starts a thread on the message | Staff Only Command | 
 
 > Message interactions marked as **Staff Only Command** require one of the following roles:
 > `✦ Quill Master`, `Senior Editor`, `Copy Editor`, `Proofreader`, `Event Curator`, or `Archivist`.
