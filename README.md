@@ -9,6 +9,8 @@ Arlo is the custom Discord bot for **Nova Archives** — a writers and readers c
 ### 💬 Message Interactions
 Arlo listens to messages and responds contextually.
 
+<div align = "center">
+
 | Trigger | What Arlo Does | Comment |
 |---|---|---|
 | Any message containing `Arlo` | Reacts with 👀 | Global Interaction |
@@ -19,6 +21,8 @@ Arlo listens to messages and responds contextually.
 | `Arlo, Update Staff` | Sends the Guide Embed in a Staff Channel | Staff Only Interaction | 
 | `Arlo, Reload the Gun` | Sends the Prompt Roulette Embed Set in Prompt Roulette Channel | Staff Only Interaction | 
 
+</div>
+
 > Message interactions marked as **Staff Only Interaction** require one of the following roles:
 > `✦ Quill Master`, `Senior Editor`, `Copy Editor`, `Proofreader`, `Event Curator`, or `Archivist`.
 
@@ -26,11 +30,15 @@ Arlo listens to messages and responds contextually.
 
 ### ⚡ Slash Commands
 
+<div align = "center">
+
 | Command | Description | Comment |
 |---|---|---|
 | `/report` | Report a member to the moderation team. Sends an embed to the staff channel and confirms with an ephemeral reply to the user. | Global Command | 
 | `/warn` | Warn a member in the community. Sends an embed to the staff channel and confirms with an ephemeral reply to the moderator. | Staff Only Command | 
 | `/speak-embed` | Member can send an embed with custom Title, Description, Thumbnail, Image and Url. The bot will make a note of who triggered the embed. | Staff Only Command | 
+
+</div>
 
 > Slash commands marked as **Staff Only Command** require one of the following roles:
 > `✦ Quill Master`, `Senior Editor`, `Copy Editor`, `Proofreader`, `Event Curator`, or `Archivist`.
@@ -38,10 +46,14 @@ Arlo listens to messages and responds contextually.
 
 ### 🤝🏻 Passive Interactions
 
+<div align = "center">
+
 | Trigger | Description | Comment |
 |---|---|---|
 | Any message in `#🖋️・introduction` | Arlo reacts with 👋🏻 | Global Interaction | 
 | Any message in `#🎉・milestones` | Arlo reacts with 👏🏻 and 🎉 | Global Interaction | 
+
+</div>
 
 ---
 
@@ -71,9 +83,13 @@ package.json
 
 ## Tech Stack
 
+<div align = "center">
+
   ![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=flat&logo=javascript)
   ![discord.js](https://img.shields.io/badge/discord.js-5865F2?style=flat&logo=discord&logoColor=white)
   ![node.js](https://img.shields.io/badge/Node.js-233056?style=flat&logo=node.js)
+
+</div>
 
 ---
 
