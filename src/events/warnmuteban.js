@@ -140,5 +140,71 @@ User ID: ${interaction.options.getUser('user').id}`,
                 flags: 64 
             });
         }
+
+        if (interaction.commandName === 'ban') {
+            await interaction.deferReply({ ephemeral: true });
+            
+            const BanEmbed = new EmbedBuilder()
+                .setTitle('🔨・A User has been Banned!')
+                .setDescription(`**${interaction.user} has banned ${interaction.options.getUser('user')}** for misconduct of rules.`)
+                .setColor('#285A48')
+                .setFields(
+                    {
+                        name: '👤・Banner Details',
+                        value: `Usertag: ${interaction.user.tag}
+User ID: ${interaction.user.id}`,
+                        inline: true
+                    },
+                    {
+                        name: '👤・Banned User Details',
+                        value: `Usertag: ${interaction.options.getUser('user').tag}
+User ID: ${interaction.options.getUser('user').id}`,
+                        inline: true
+                    },
+                    {
+                        name: '💳・Reason',
+                        value: `${interaction.options.getString('reason')}`,
+                        inline: false
+                    },
+                    {
+                        name: '🔗・Message Link',
+                        value: `${interaction.options.getString('message-link') || 'N/A'}`,
+                        inline: false
+                    }
+                )
+                .setThumbnail(interaction.options.getUser('user').displayAvatarURL())
+                .setFooter({ text: 'Arlo is always watching', iconURL: interaction.user.displayAvatarURL() })
+                .setTimestamp();
+
+            const banChannel = interaction.client.channels.cache.get(process.env.BAN_CHANNEL_ID);
+            await banChannel.send({ 
+                content: `<@${interaction.options.getUser('user').id}> has been banned.`
+            })
+            await banChannel.send({
+                embeds: [BanEmbed] 
+            });
+
+            const banTarget = await interaction.guild.members.fetch(interaction.options.getUser('user').id);
+            await banTarget.ban({ 
+                reason: interaction.options.getString('reason') || 'No reason provided' 
+            }).catch(console.error);
+
+            // DM the banned user
+            await banTarget.send({
+                embeds: [
+                    new EmbedBuilder()
+                        .setTitle('🔨 You have been banned in Nova Archives')
+                        .setDescription(`You have been banned from Nova Archives.\n${interaction.options.getString('reason') || 'No reason provided'}\nContact the moderators for more information.`)
+                        .setColor('#285A48')
+                        .setTimestamp()
+                        .setFooter({ text: 'Thank you for your experience in Nova Archives.' })
+                    ]
+                }).catch(() => console.log('Could not DM banned user — DMs likely closed.'));
+            
+            await interaction.editReply({ 
+                content: `<@${interaction.options.getUser('user').id}> has been banned. Rest free, ${interaction.user.tag}!`, 
+                flags: 64 
+            });
+        }
     });
 }
