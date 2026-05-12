@@ -43,7 +43,7 @@ module.exports = (client) => {
         break;
 
       case "genall":
-        label = "Full Prompt";
+        label = "Fragments";
         value =
           `Protagonist: ${getRandom(prompts.fragment.protagonist)}\n` +
           `Setting: ${getRandom(prompts.fragment.setting)}\n` +
@@ -75,7 +75,7 @@ module.exports = (client) => {
         break;
 
       case "all_limit":
-        label = "All Constraints";
+        label = "Chaotic Constraints";
         value =
           `Limitation: ${getRandom(prompts.constraint.limitation)}\n` +
           `Time: ${getRandom(prompts.constraint.time)}\n` +
@@ -105,7 +105,7 @@ module.exports = (client) => {
         break;
 
       case "randall":
-        label = "Random Everything";
+        label = "Wildcard set Pull";
         value =
           `Object: ${getRandom(prompts.wildcard.object)}\n` +
           `Character: ${getRandom(prompts.wildcard.character)}\n` +
@@ -119,7 +119,7 @@ module.exports = (client) => {
 
     await interaction.reply({
       content: `**Your ${label}:**\n${value}`,
-      ephemeral: true
+      flags: 64
     });
   });
 };
