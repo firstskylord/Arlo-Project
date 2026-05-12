@@ -4,7 +4,7 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 module.exports = (client) => {
     client.on('interactionCreate', async (interaction) => {
 
-        // Admin Availability Button Logic ONLY | Other buttons in interactionHandlers.js
+        // Admin Availability Button Logic ONLY | Other buttons in buttonhandlers.js
 
         if (interaction.isButton()) { 
             if (interaction.customId === 'toggle_availability') {
@@ -84,7 +84,7 @@ Review the embed above, interrogate the situation, discuss among yourselves here
             await interaction.reply({ content: 'Your report has been submitted. Moderators will look into it as soon as possible.', ephemeral: true });
         }
 
-            if (interaction.commandName === 'speak-embed') {
+        if (interaction.commandName === 'speak-embed') {
 
             await interaction.deferReply({ ephemeral: true });
 
@@ -103,6 +103,17 @@ Review the embed above, interrogate the situation, discuss among yourselves here
             await interaction.channel.send({ embeds: [CommsEmbed] });
 
             await interaction.editReply('Embed has been sent in the current channel.');
+        }
+
+        if (interaction.commandName === 'ping') {
+            const sent = await interaction.reply({ 
+                content: 'Pinging...', 
+                fetchReply: true 
+            });
+  
+            await interaction.editReply(
+            `🏓 Pong! Latency: ${sent.createdTimestamp - interaction.createdTimestamp}ms | API: ${Math.round(interaction.client.ws.ping)}ms`
+            );
         }
     })
 }
