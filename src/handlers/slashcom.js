@@ -32,7 +32,27 @@ module.exports = (client) => {
         }
     }}
 
-        if (!interaction.isChatInputCommand()) return;
+        // ONLY Context Menu Commands
+
+        if (interaction.commandName === 'Message Information') {
+            
+            const targetMessage = interaction.targetMessage;
+
+            await interaction.reply({ 
+                content: `### Message Information:\n**Message ID:** ${targetMessage.id}\n**Author:** ${targetMessage.author.tag}\n**Message Link:** ${targetMessage.url}`,
+                flags: 64
+            });
+        }
+
+        if (interaction.commandName === 'User Information') {
+            
+            const targetUser = interaction.targetUser;
+
+            await interaction.reply({ 
+                content: `### User Information:\n**User ID:** ${targetUser.id}\n**Username:** ${targetUser.tag}\n**Avatar:** ${targetUser.displayAvatarURL()}`,
+                flags: 64
+            });
+        }
 
         // ONLY Slash Commands
 

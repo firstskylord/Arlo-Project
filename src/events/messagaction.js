@@ -218,7 +218,7 @@ Moderation won't be able to handle issues through member-to-member DMs — if so
                     },
                     {
                         name: `Event Curator`,
-                        value: `- <@${process.env.OG_EVENT_CURATOR_ID}>`
+                        value: `- 🗅`
                     },
                     {
                         name: `Archivist`,
