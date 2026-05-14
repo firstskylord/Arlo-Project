@@ -58,10 +58,10 @@ Arlo listens to messages and responds contextually.
 | `User Information` | Check the User Information such as User ID, Usertag and Avatar. Triggered through Context Menu. | Staff Only Interaction | 
 | `Message Information` | Check the Message Information such as Message ID, Message Author tag and Message Link. Triggered through Context Menu. | Staff Only Interaction | 
 
+</div>
+
 > Slash commands marked as **Staff Only Command** require one of the following roles:
 > `✦ Quill Master`, `Senior Editor`, `Copy Editor`, `Proofreader`, `Event Curator`, or `Archivist`.
-
-</div>
 
 ---
 
