@@ -60,7 +60,7 @@ Arlo listens to messages and responds contextually.
 
 </div>
 
-> Slash commands marked as **Staff Only Command** require one of the following roles:
+> Interactions marked as **Staff Only Interactions** require one of the following roles:
 > `✦ Quill Master`, `Senior Editor`, `Copy Editor`, `Proofreader`, `Event Curator`, or `Archivist`.
 
 ---
@@ -94,9 +94,10 @@ package.json
 
 <div align = "center">
 
-  ![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=flat&logo=javascript)
-  ![discord.js](https://img.shields.io/badge/discord.js-5865F2?style=flat&logo=discord&logoColor=white)
-  ![node.js](https://img.shields.io/badge/Node.js-233056?style=flat&logo=node.js)
+  ![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
+  ![Discord.js](https://img.shields.io/badge/Discord%20js-5865F2?style=for-the-badge&logo=discorddotjs&logoColor=white)
+  ![Node.js](https://img.shields.io/badge/Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+  ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
 
 </div>
 
