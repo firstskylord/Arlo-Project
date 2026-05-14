@@ -36,7 +36,10 @@ Arlo listens to messages and responds contextually.
 |---|---|---|
 | `/report` | Report a member to the moderation team. Sends an embed to the staff channel and confirms with an ephemeral reply to the user. | Global Command | 
 | `/warn` | Warn a member in the community. Sends an embed to the staff channel and confirms with an ephemeral reply to the moderator. | Staff Only Command | 
+| `/mute` | Mute / Timeout a member in the community. Sends an embed to the staff channel and confirms with an ephemeral reply to the moderator. | Staff Only Command | 
+| `/ban` | Ban a member in the community. Sends an embed to the staff channel and confirms with an ephemeral reply to the moderator. | Staff Only Command | 
 | `/speak-embed` | Member can send an embed with custom Title, Description, Thumbnail, Image and Url. The bot will make a note of who triggered the embed. | Staff Only Command | 
+| `/ping` | Check the Latency of the Bot and the API. | Staff Only Command | 
 
 </div>
 
@@ -52,6 +55,11 @@ Arlo listens to messages and responds contextually.
 |---|---|---|
 | Any message in `#🖋️・introduction` | Arlo reacts with 👋🏻 | Global Interaction | 
 | Any message in `#🎉・milestones` | Arlo reacts with 👏🏻 and 🎉 | Global Interaction | 
+| `User Information` | Check the User Information such as User ID, Usertag and Avatar. Triggered through Context Menu. | Staff Only Interaction | 
+| `Message Information` | Check the Message Information such as Message ID, Message Author tag and Message Link. Triggered through Context Menu. | Staff Only Interaction | 
+
+> Slash commands marked as **Staff Only Command** require one of the following roles:
+> `✦ Quill Master`, `Senior Editor`, `Copy Editor`, `Proofreader`, `Event Curator`, or `Archivist`.
 
 </div>
 
@@ -71,7 +79,8 @@ src/
     ├── buttonhandlers.js     — All button handling logic
     └── slashcom.js           — All slash command logic
 ├── index.js                  — Bot startup and login
-└── regist-commands.js        — Slash command registration with Discord API
+├── regist-commands.js        — Slash command registration with Discord API
+└── regist-context-comm.js    — Context Menu command registration with Discord API
 .gitignore
 README.md
 package-lock.json

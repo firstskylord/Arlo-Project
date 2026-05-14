@@ -1,6 +1,4 @@
-require('dotenv').config();
-const { EmbedBuilder } = require('discord.js');
+require('dotenv').config()
+const { EmbedBuilder } = require('discord.js')
 
-module.exports = (client) => {
-    
-}
+module.exports = (client) => {}

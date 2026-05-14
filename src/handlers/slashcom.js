@@ -1,139 +1,175 @@
-require('dotenv').config();
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+require('dotenv').config()
+const {
+  EmbedBuilder,
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+} = require('discord.js')
 
 module.exports = (client) => {
-    client.on('interactionCreate', async (interaction) => {
+  client.on('interactionCreate', async (interaction) => {
+    // Admin Availability Button Logic ONLY | Other buttons in buttonhandlers.js
 
-        // Admin Availability Button Logic ONLY | Other buttons in buttonhandlers.js
+    if (interaction.isButton()) {
+      if (interaction.customId === 'toggle_availability') {
+        await interaction.deferReply({ ephemeral: true })
 
-        if (interaction.isButton()) { 
-            if (interaction.customId === 'toggle_availability') {
+        console.log('Button triggered by:', interaction.member.displayName)
 
-            await interaction.deferReply({ ephemeral: true });
+        const modRoles = [
+          '✦ Quill Master',
+          'Senior Editor',
+          'Copy Editor',
+          'Proofreader',
+          'Event Curator',
+          'Archivist',
+        ]
+        const unavailableRoleName = 'Shelved Editor'
 
-            console.log('Button triggered by:', interaction.member.displayName);
+        const unavailableRole = interaction.guild.roles.cache.find(
+          (r) => r.name === unavailableRoleName,
+        )
+        if (!unavailableRole)
+          return interaction.editReply({ content: 'Role not found.' })
 
-            const modRoles = ['✦ Quill Master', 'Senior Editor', 'Copy Editor', 'Proofreader', 'Event Curator', 'Archivist'];
-            const unavailableRoleName = 'Shelved Editor';
+        const hasUnavailable = interaction.member.roles.cache.has(
+          unavailableRole.id,
+        )
 
-            const unavailableRole = interaction.guild.roles.cache.find(r => r.name === unavailableRoleName);
-            if (!unavailableRole) return interaction.editReply({ content: 'Role not found.'});
-
-            const hasUnavailable = interaction.member.roles.cache.has(unavailableRole.id);
-
-            if (hasUnavailable) {
-                await interaction.member.roles.remove(unavailableRole);
-                await interaction.editReply({ content: 'You are back. Welcome back to the desk 🟢'});
-            } else {
-                const modRolesToRemove = interaction.member.roles.cache.filter(r => modRoles.includes(r.name));
-                if (modRolesToRemove.size > 0) await interaction.member.roles.remove(modRolesToRemove);
-                await interaction.member.roles.add(unavailableRole);
-                await interaction.editReply({ content: 'You are now shelved. Mod roles removed until you return 🔴'});
+        if (hasUnavailable) {
+          await interaction.member.roles.remove(unavailableRole)
+          await interaction.editReply({
+            content: 'You are back. Welcome back to the desk 🟢',
+          })
+        } else {
+          const modRolesToRemove = interaction.member.roles.cache.filter((r) =>
+            modRoles.includes(r.name),
+          )
+          if (modRolesToRemove.size > 0)
+            await interaction.member.roles.remove(modRolesToRemove)
+          await interaction.member.roles.add(unavailableRole)
+          await interaction.editReply({
+            content:
+              'You are now shelved. Mod roles removed until you return 🔴',
+          })
         }
-    }}
+      }
+    }
 
-        // ONLY Context Menu Commands
+    // ONLY Context Menu Commands
 
-        if (interaction.commandName === 'Message Information') {
-            
-            const targetMessage = interaction.targetMessage;
+    if (interaction.commandName === 'Message Information') {
+      const targetMessage = interaction.targetMessage
 
-            await interaction.reply({ 
-                content: `### Message Information:\n**Message ID:** ${targetMessage.id}\n**Author:** ${targetMessage.author.tag}\n**Message Link:** ${targetMessage.url}`,
-                flags: 64
-            });
-        }
+      await interaction.reply({
+        content: `### Message Information:\n**Message ID:** ${targetMessage.id}\n**Author:** ${targetMessage.author.tag}\n**Message Link:** ${targetMessage.url}`,
+        flags: 64,
+      })
+    }
 
-        if (interaction.commandName === 'User Information') {
-            
-            const targetUser = interaction.targetUser;
+    if (interaction.commandName === 'User Information') {
+      const targetUser = interaction.targetUser
 
-            await interaction.reply({ 
-                content: `### User Information:\n**User ID:** ${targetUser.id}\n**Username:** ${targetUser.tag}\n**Avatar:** ${targetUser.displayAvatarURL()}`,
-                flags: 64
-            });
-        }
+      await interaction.reply({
+        content: `### User Information:\n**User ID:** ${targetUser.id}\n**Username:** ${targetUser.tag}\n**Avatar:** ${targetUser.displayAvatarURL()}`,
+        flags: 64,
+      })
+    }
 
-        // ONLY Slash Commands
+    // ONLY Slash Commands
 
-        if (interaction.commandName === 'report') {
-            const ReportEmbed = new EmbedBuilder()
-                .setTitle('📄・A Side-Quest has been assigned!')
-                .setDescription(`**${interaction.user} has reported ${interaction.options.getUser('user')}** for misconduct of rules.
-Please check the reason below and take necessary action.`)
-                .setFields(
-                    {
-                        name: '👤・Reason',
-                        value: `${interaction.options.getString('reason')}`
-                    },
-                    {
-                        name: '🔗・Message Link',
-                        value: `${interaction.options.getString('message-link') || 'N/A'}`
-                    },
-                    {
-                        name: '💳・UserID',
-                        value: `${interaction.options.getUser('user').id}`,
-                        inline: true
-                    },
-                    {
-                        name: '🆔・ReporterID',
-                        value: `${interaction.user.id}`,
-                        inline: true
-                    }
-                )
-                .setThumbnail(interaction.options.getUser('user').displayAvatarURL())
-                .setImage(interaction.options.getAttachment('evidence') ? interaction.options.getAttachment('evidence').url : null)
-                .setColor('#1abc9c')
-                .setFooter({ text: 'Keep up the great work!', iconURL: interaction.user.displayAvatarURL() })
-                .setTimestamp();
+    if (interaction.commandName === 'report') {
+      const ReportEmbed = new EmbedBuilder()
+        .setTitle('📄・A Side-Quest has been assigned!')
+        .setDescription(
+          `**${interaction.user} has reported ${interaction.options.getUser('user')}** for misconduct of rules.
+Please check the reason below and take necessary action.`,
+        )
+        .setFields(
+          {
+            name: '👤・Reason',
+            value: `${interaction.options.getString('reason')}`,
+          },
+          {
+            name: '🔗・Message Link',
+            value: `${interaction.options.getString('message-link') || 'N/A'}`,
+          },
+          {
+            name: '💳・UserID',
+            value: `${interaction.options.getUser('user').id}`,
+            inline: true,
+          },
+          {
+            name: '🆔・ReporterID',
+            value: `${interaction.user.id}`,
+            inline: true,
+          },
+        )
+        .setThumbnail(interaction.options.getUser('user').displayAvatarURL())
+        .setImage(
+          interaction.options.getAttachment('evidence')
+            ? interaction.options.getAttachment('evidence').url
+            : null,
+        )
+        .setColor('#1abc9c')
+        .setFooter({
+          text: 'Keep up the great work!',
+          iconURL: interaction.user.displayAvatarURL(),
+        })
+        .setTimestamp()
 
-            const reportChannel = interaction.client.channels.cache.get(process.env.REPORT_CHANNEL_ID);
-            const reportMessage = await reportChannel.send({ embeds: [ReportEmbed] });
+      const reportChannel = interaction.client.channels.cache.get(
+        process.env.REPORT_CHANNEL_ID,
+      )
+      const reportMessage = await reportChannel.send({ embeds: [ReportEmbed] })
 
-            const reportThread = await reportMessage.startThread({
-                name: `📋 Report ・ ${interaction.options.getUser('user').username}`,
-                autoArchiveDuration: 1440,
-            });
+      const reportThread = await reportMessage.startThread({
+        name: `📋 Report ・ ${interaction.options.getUser('user').username}`,
+        autoArchiveDuration: 1440,
+      })
 
-            await reportThread.send(
-                `<@&1479068546054230016> <@&1479069863103172770> <@&1479070225361272884>
+      await reportThread.send(
+        `<@&1479068546054230016> <@&1479069863103172770> <@&1479070225361272884>
 **New side quest has dropped.**
-Review the embed above, interrogate the situation, discuss among yourselves here, and close the thread once action is taken.`
-            );
+Review the embed above, interrogate the situation, discuss among yourselves here, and close the thread once action is taken.`,
+      )
 
-            await interaction.reply({ content: 'Your report has been submitted. Moderators will look into it as soon as possible.', ephemeral: true });
-        }
+      await interaction.reply({
+        content:
+          'Your report has been submitted. Moderators will look into it as soon as possible.',
+        ephemeral: true,
+      })
+    }
 
-        if (interaction.commandName === 'speak-embed') {
+    if (interaction.commandName === 'speak-embed') {
+      await interaction.deferReply({ ephemeral: true })
 
-            await interaction.deferReply({ ephemeral: true });
+      const CommsEmbed = new EmbedBuilder()
+        .setTitle(interaction.options.getString('title'))
+        .setDescription(interaction.options.getString('description'))
+        .setThumbnail(interaction.options.getString('thumbnail') || null)
+        .setImage(interaction.options.getString('image') || null)
+        .setURL(interaction.options.getString('url') || null)
+        .setColor('#1abc9c')
+        .setFooter({
+          text: `Written by ${interaction.user.tag}`,
+        })
+        .setTimestamp()
 
-            const CommsEmbed = new EmbedBuilder()
-                .setTitle(interaction.options.getString('title'))
-                .setDescription(interaction.options.getString('description'))
-                .setThumbnail(interaction.options.getString('thumbnail') || null)
-                .setImage(interaction.options.getString('image') || null)
-                .setURL(interaction.options.getString('url') || null)
-                .setColor('#1abc9c')
-                .setFooter({ 
-                    text: `Written by ${interaction.user.tag}`,
-                })
-                .setTimestamp();
+      await interaction.channel.send({ embeds: [CommsEmbed] })
 
-            await interaction.channel.send({ embeds: [CommsEmbed] });
+      await interaction.editReply('Embed has been sent in the current channel.')
+    }
 
-            await interaction.editReply('Embed has been sent in the current channel.');
-        }
+    if (interaction.commandName === 'ping') {
+      const sent = await interaction.reply({
+        content: 'Pinging...',
+        fetchReply: true,
+      })
 
-        if (interaction.commandName === 'ping') {
-            const sent = await interaction.reply({ 
-                content: 'Pinging...', 
-                fetchReply: true 
-            });
-  
-            await interaction.editReply(
-            `🏓 Pong! Latency: ${sent.createdTimestamp - interaction.createdTimestamp}ms | API: ${Math.round(interaction.client.ws.ping)}ms`
-            );
-        }
-    })
+      await interaction.editReply(
+        `🏓 Pong! Latency: ${sent.createdTimestamp - interaction.createdTimestamp}ms | API: ${Math.round(interaction.client.ws.ping)}ms`,
+      )
+    }
+  })
 }
